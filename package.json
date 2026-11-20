@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run build-storybook && next build",
     "start": "next start",
     "lint": "eslint",
     "storybook": "node --use-system-ca node_modules/storybook/dist/bin/dispatcher.js dev -p 6006",
-    "build-storybook": "node --use-system-ca node_modules/storybook/dist/bin/dispatcher.js build"
+    "build-storybook": "node --use-system-ca node_modules/storybook/dist/bin/dispatcher.js build -o public/storybook --quiet"
   },
   "dependencies": {
     "next": "16.4.6",
