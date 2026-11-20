@@ -92,6 +92,22 @@
   --font-display: var(--font-urbanist), var(--font-inter), sans-serif; /* font-display: слово «design.» */
 }
 
+/*
+ * Сітка першого екрана на широкому екрані: пропорції колонок зі старого макета 1920px
+ * (портрет 229, проміжок 21, про мене 274, проміжок 146, пітч 316, проміжок 56, кейси 818).
+ * Пітч не вужчий за 20rem, щоб кнопка запиту вміщалася.
+ */
+@utility grid-cols-hero {
+  grid-template-columns:
+    minmax(0, 229fr) minmax(0, 21fr) minmax(0, 274fr) minmax(0, 146fr)
+    minmax(20rem, 316fr) minmax(0, 56fr) minmax(0, 818fr);
+}
+
+/* Ховає смугу прокрутки, прокрутка лишається (карусель кейсів). */
+@utility scrollbar-none {
+  scrollbar-width: none;
+}
+
 @layer base {
   body {
     background-color: var(--color-canvas);

@@ -2,6 +2,7 @@
 
 import { useId } from "react";
 import type { ButtonHTMLAttributes, MouseEvent, ReactNode } from "react";
+import { ArrowIcon } from "../icons/ArrowIcon";
 
 export type ButtonVariant = "primary" | "secondary";
 export type ButtonSize = "md" | "lg";
@@ -62,18 +63,13 @@ const states: Record<ButtonVariant, { enabled: { label: string; circle: string }
 
 function Arrow({ animated }: { animated: boolean }) {
   return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      fill="currentColor"
+    <ArrowIcon
       className={`size-6 -rotate-45 ${
         animated
           ? "transition-transform motion-reduce:transition-none group-hover:rotate-0 group-focus-visible:rotate-0"
           : ""
       }`}
-    >
-      <path d="M10.6548 20.0142L12.6992 22.0586L22.3965 12.3614L12.6992 2.6641L10.6548 4.70852L16.8618 10.9155H3.00196V13.8072H16.8618L10.6548 20.0142Z" />
-    </svg>
+    />
   );
 }
 

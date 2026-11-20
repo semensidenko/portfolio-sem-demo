@@ -35,6 +35,12 @@
 - **Header** ([src/components/Header/Header.tsx](src/components/Header/Header.tsx)) — шапка сайту: логотип (`logo`, зараз «Семен Сіденко»), Nav, LangSwitch і Button «Розповісти про проєкт». Прилипає до верху (`sticky`). Від `xl` (1280px) в один рядок, вужче — бургер, кнопка запиту в мобільному меню. Storybook: `Components/Header`.
 - **Nav** ([src/components/Nav/Nav.tsx](src/components/Nav/Nav.tsx)) — меню з п'яти пунктів (Роботи, Пакети, Процес, Про мене, Контакти), активний через `activeHref`. Повертає бургер і `<nav>` без обгортки: потрібен батьківський flex-контейнер з `flex-wrap`. Storybook: `Components/Nav`.
 - **LangSwitch** ([src/components/LangSwitch/LangSwitch.tsx](src/components/LangSwitch/LangSwitch.tsx)) — перемикач UA/EN з «бульбашкою», кнопки з `aria-pressed`. Лише повідомляє про вибір через `onChange`, перекладу ще немає. Storybook: `Components/LangSwitch`.
+- **Hero** ([src/components/Hero/Hero.tsx](src/components/Hero/Hero.tsx)) — перший екран головної: портрет, ім'я й роль, TextLink, заголовок h1 з текстом і Button, CaseCarousel, велике слово «design.». Від `2xl` (1536px) один ряд у пропорціях старого макета (утиліта `grid-cols-hero` у `globals.css`), вужче — дві колонки. Стоїть на головній у [src/app/page.tsx](src/app/page.tsx). Storybook: `Components/Hero`.
+- **TextLink** ([src/components/TextLink/TextLink.tsx](src/components/TextLink/TextLink.tsx)) — посилання-дія великими літерами з лінією, що «малюється» при наведенні («Дивитися роботи»). Storybook: `Components/TextLink`.
+- **CaseCard** ([src/components/CaseCard/CaseCard.tsx](src/components/CaseCard/CaseCard.tsx)) — картка кейса 4:3, уся картка — посилання; плашка з назвою й форматом і кружок зі стрілкою з'являються при наведенні (на сенсорних екранах видні завжди). Storybook: `Components/CaseCard`.
+- **CaseCarousel** ([src/components/CaseCarousel/CaseCarousel.tsx](src/components/CaseCarousel/CaseCarousel.tsx)) — карусель CaseCard: дві картки від `xl`, одна вужче; свайп, трекпад, крапки. Без автопрокрутки. Storybook: `Components/CaseCarousel`.
+
+Спільне: стрілка — [src/components/icons/ArrowIcon.tsx](src/components/icons/ArrowIcon.tsx); дані кейсів — [src/content/cases.ts](src/content/cases.ts); картинки — `src/assets` (імпортуються в код).
 
 ## Правила
 
