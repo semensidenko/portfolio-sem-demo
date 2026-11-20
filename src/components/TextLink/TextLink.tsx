@@ -5,6 +5,11 @@ export interface TextLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   children: ReactNode;
   /** Куди веде посилання (наприклад, `#works`). */
   href: string;
+  /**
+   * `md` — завжди 18px (`text-label`); `adaptive` — на вузькому телефоні (до 480px)
+   * 15px (`text-compact`), ширше — 18px, як у старому макеті.
+   */
+  size?: "md" | "adaptive";
 }
 
 /**
@@ -12,12 +17,12 @@ export interface TextLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
  * При наведенні чи фокусі лінія зникає й «малюється» знову зліва направо.
  * Приклад: «Дивитися роботи» на першому екрані.
  */
-export function TextLink({ children, href, className, ...rest }: TextLinkProps) {
+export function TextLink({ children, href, size = "md", className, ...rest }: TextLinkProps) {
   return (
     <a
       href={href}
       className={[
-        "group relative inline-block pb-2 text-label font-bold uppercase text-ink",
+        `group relative inline-block pb-2 font-bold uppercase text-ink ${size === "adaptive" ? "text-compact phone:text-label" : "text-label"}`,
         "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent",
         className,
       ]
@@ -29,12 +34,12 @@ export function TextLink({ children, href, className, ...rest }: TextLinkProps) 
       {/* Лінія в спокої: зникає при наведенні */}
       <span
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-0.5 bg-ink transition-opacity motion-reduce:transition-none group-hover:opacity-0 group-focus-visible:opacity-0"
+        className="absolute inset-x-0 bottom-0 h-0.5 bg-ink transition-opacity duration-150 motion-reduce:transition-none group-hover:opacity-0 group-focus-visible:opacity-0"
       />
       {/* Лінія, що малюється зліва направо */}
       <span
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-ink transition-transform duration-500 motion-reduce:transition-none group-hover:scale-x-100 group-focus-visible:scale-x-100"
+        className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-ink transition-transform duration-450 motion-reduce:transition-none group-hover:scale-x-100 group-focus-visible:scale-x-100"
       />
     </a>
   );

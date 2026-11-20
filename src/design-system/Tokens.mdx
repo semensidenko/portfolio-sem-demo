@@ -28,7 +28,7 @@ import { fontVariables } from "../app/fonts";
 
 <Typeset
   fontFamily="var(--font-inter)"
-  fontSizes={["var(--text-caption)", "var(--text-body)", "var(--text-label)", "var(--text-lead)", "var(--text-heading)"]}
+  fontSizes={["var(--text-caption)", "var(--text-compact)", "var(--text-small)", "var(--text-meta)", "var(--text-body)", "var(--text-label)", "var(--text-lead)", "var(--text-heading)"]}
   sampleText="Сайти, яким довіряють з першого екрана"
 />
 
@@ -40,7 +40,10 @@ import { fontVariables } from "../app/fonts";
   <div><p className="text-caption text-ink-muted">text-caption · формат у картці кейса</p><p className="text-caption">Багатосторінковий сайт</p></div>
   <div><p className="text-caption text-ink-muted">text-body · основний текст</p><p className="text-body">Проєктую дизайн лендінгів і сайтів, які з першого екрана виглядають так, що бізнесу довіряють.</p></div>
   <div><p className="text-caption text-ink-muted">text-label + uppercase · меню, перемикач мови, текст кнопок (для дій ще font-bold)</p><p className="text-label uppercase">Роботи · Пакети · Процес</p><p className="text-label font-bold uppercase">Розповісти про проєкт</p></div>
-  <div><p className="text-caption text-ink-muted">text-lead · вступний текст</p><p className="text-lead">Оберіть свою сферу, щоб побачити схожий проєкт</p></div>
+  <div><p className="text-caption text-ink-muted">text-meta · роль під ім'ям (17px)</p><p className="text-meta"><strong className="font-bold">UI/UX-дизайнер, 2+</strong> років досвіду</p></div>
+  <div><p className="text-caption text-ink-muted">text-small · назва в плашці картки (16px жирним)</p><p className="text-small">Nordic Frame</p></div>
+  <div><p className="text-caption text-ink-muted">text-compact · роль і посилання на вузькому телефоні (15px)</p><p className="text-compact">UI/UX-дизайнер, 2+ років досвіду</p></div>
+  <div><p className="text-caption text-ink-muted">text-lead · вступний текст; ім'я на вузькому телефоні (жирним)</p><p className="text-lead">Оберіть свою сферу, щоб побачити схожий проєкт</p></div>
   <div><p className="text-caption text-ink-muted">text-heading · заголовки блоків</p><p className="text-heading">Дизайн сайтів для бізнесу</p></div>
   <div><p className="text-caption text-ink-muted">text-display + font-display · велике слово</p><p className="font-display text-display">design.</p></div>
 </div>
@@ -50,14 +53,40 @@ import { fontVariables } from "../app/fonts";
 <div className="sb-unstyled flex flex-wrap gap-6 font-sans">
   <div className="rounded-control border border-ink-muted px-6 py-3 text-label uppercase">rounded-control</div>
   <div className="rounded-card border border-line bg-surface p-8 text-body">rounded-card · прямі кути</div>
+  <div className="flex flex-col rounded-tag bg-surface px-3 py-2"><span className="text-body font-bold">rounded-tag</span><span className="text-caption text-ink-muted">плашка з назвою на картці кейса</span></div>
 </div>
 
-## Пропорції картинок
+## Пропорції
 
 <div className="sb-unstyled grid grid-cols-4 gap-6 font-sans text-caption">
   <div className="col-span-2 flex flex-col gap-2"><div className="aspect-cover rounded-card bg-line" /><p>aspect-cover · обкладинка кейса</p></div>
-  <div className="flex flex-col gap-2"><div className="aspect-portrait rounded-card bg-line" /><p>aspect-portrait · портрет</p></div>
+  <div className="flex flex-col gap-2"><div className="aspect-portrait rounded-card bg-line" /><p>aspect-portrait · портрет, 229:299 як у старому макеті</p></div>
+  <div className="col-span-4 flex flex-col gap-2"><div className="aspect-hero rounded-card bg-line" /><p>aspect-hero · перший екран без шапки на широкому екрані (разом із шапкою — 1920×960)</p></div>
 </div>
+
+## Рух
+
+Анімації вмикаються лише з класом-префіксом `motion-safe:`, а переходи мають `motion-reduce:transition-none`: якщо людина вимкнула анімації в системі, їх немає.
+
+### Криві (наведіть на рядок)
+
+<div className="sb-unstyled flex flex-col gap-4 font-sans text-caption">
+  <div className="group flex items-center gap-4"><div className="size-8 rounded-control bg-accent transition-transform duration-550 ease-spring motion-reduce:transition-none group-hover:translate-x-32" /><p>ease-spring · пружинка з «перельотом» (бульбашка мови)</p></div>
+  <div className="group flex items-center gap-4"><div className="size-8 rounded-control bg-accent transition-transform duration-800 ease-soft motion-reduce:transition-none group-hover:translate-x-32" /><p>ease-soft · м'яка зупинка (поява блоків)</p></div>
+  <div className="group flex items-center gap-4"><div className="size-8 rounded-control bg-accent transition-transform duration-600 ease-glide motion-reduce:transition-none group-hover:translate-x-32" /><p>ease-glide · плавний старт і зупинка (карусель)</p></div>
+</div>
+
+### Анімації (програються при відкритті сторінки)
+
+<div className="sb-unstyled flex flex-wrap items-end gap-8 font-sans text-caption">
+  <div className="flex flex-col gap-2"><div className="size-16 bg-accent motion-safe:animate-rise" /><p>animate-rise · поява знизу; затримка — змінна --delay</p></div>
+  <div className="flex flex-col gap-2"><p className="font-display text-heading">{Array.from("design.").map((c, i) => <span key={i} className="motion-safe:animate-letter" style={{ "--delay": `${0.35 + i * 0.22}s` }}>{c}</span>)}</p><p>animate-letter · «друк» по літері</p></div>
+  <div className="flex flex-col gap-2"><div className="h-8 w-16 rounded-control bg-accent motion-safe:animate-squash" /><p>animate-squash · «крапля» перемикача мови</p></div>
+</div>
+
+### Утиліти розкладки
+
+Не токени, а готові класи з `globals.css` для двох місць: `grid-cols-hero` — колонки першого екрана в пропорціях старого макета; `scrollbar-none` — прихована смуга прокрутки каруселі.
 
 ## Відступи
 
@@ -69,6 +98,19 @@ import { fontVariables } from "../app/fonts";
   <div className="flex flex-col items-start gap-2"><div className="size-4 bg-accent" /><p>4</p></div>
   <div className="flex flex-col items-start gap-2"><div className="size-6 bg-accent" /><p>6</p></div>
   <div className="flex flex-col items-start gap-2"><div className="size-8 bg-accent" /><p>8</p></div>
+</div>
+
+## Брейкпоінти й масштаб
+
+- `phone:` — від 481px. Нижче — вузький телефон: менші ім'я, роль, посилання й кружки кнопок, як у старому макеті.
+- `desk:` — від 1100px. Розкладка комп'ютера: шапка й перший екран в один ряд на сітці `grid-cols-hero`.
+- **Масштаб від 1100px**: кореневий розмір шрифту = ширина екрана / 120 (на 1920px — 16px). Усе, що задано в rem (текст, відступи, радіуси, розміри), зменшується пропорційно, як у старому макеті. Велике слово — 723px макета.
+
+## Розміри
+
+<div className="sb-unstyled flex flex-wrap items-end gap-6 font-sans text-caption">
+  <div className="flex flex-col gap-2"><div className="size-cta rounded-control bg-accent" /><p>size-cta · кружок кнопки зі стрілкою (70px макета)</p></div>
+  <div className="flex flex-col gap-2"><div className="h-header w-16 bg-line" /><p>h-header · висота шапки на комп'ютері (87px макета)</p></div>
 </div>
 
 ## Ширина сторінки

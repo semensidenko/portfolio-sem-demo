@@ -45,7 +45,25 @@
   --text-label--letter-spacing: -0.05em;
   --text-label--font-weight: 500;
 
-  /* 20px: вступний текст (запропоновано) */
+  /* 17px: роль під ім'ям на першому екрані (як у старому макеті) */
+  --text-meta: 1.0625rem;
+  --text-meta--line-height: calc(24.4 / 17);
+  --text-meta--letter-spacing: -0.0165em;
+  --text-meta--font-weight: 400;
+
+  /* 16px: назва в плашці картки кейса */
+  --text-small: 1rem;
+  --text-small--line-height: 1.1;
+  --text-small--letter-spacing: -0.031em;
+  --text-small--font-weight: 700;
+
+  /* 15px: роль і посилання-дія на вузькому телефоні (до 480px) */
+  --text-compact: 0.9375rem;
+  --text-compact--line-height: calc(20 / 15);
+  --text-compact--letter-spacing: -0.0187em;
+  --text-compact--font-weight: 400;
+
+  /* 20px: вступний текст; ім'я на вузькому телефоні */
   --text-lead: 1.25rem;
   --text-lead--line-height: 1.25;
   --text-lead--letter-spacing: -0.03em;
@@ -57,8 +75,8 @@
   --text-heading--letter-spacing: -0.03em;
   --text-heading--font-weight: 700;
 
-  /* Велике слово «design.»: росте з шириною екрана, максимум як у макеті 1920px */
-  --text-display: min(37.6vw, 723px);
+  /* Велике слово «design.»: 36% ширини екрана (від 1100px — 723px макета, див. :root нижче) */
+  --text-display: 36vw;
   --text-display--line-height: 0.9;
   --text-display--letter-spacing: -0.05em;
   --text-display--font-weight: 400;
@@ -67,19 +85,79 @@
   --radius-*: initial;
   --radius-control: 9999px; /* кнопки, поля, перемикач: таблетка */
   --radius-card: 0px; /* картки й картинки: прямі кути */
+  --radius-tag: 0.875rem; /* 14px: плашка з назвою на картці кейса */
 
-  /* ---------- Пропорції картинок ---------- */
+  /* ---------- Пропорції ---------- */
   --aspect-*: initial;
   --aspect-cover: 4 / 3; /* обкладинка кейса */
-  --aspect-portrait: 3 / 4; /* портрет */
+  --aspect-portrait: 229 / 299; /* портрет, як у старому макеті */
+  --aspect-hero: 1920 / 873; /* перший екран без шапки від 1100px: 1920×960 мінус шапка 87 */
+
+  /* ---------- Брейкпоінти ---------- */
+  --breakpoint-phone: 30.0625rem; /* phone: від 481px — більше не вузький телефон */
+  --breakpoint-desk: 68.75rem; /* desk: від 1100px — розкладка комп'ютера, як у старому макеті */
+
+  /* ---------- Розміри ---------- */
+  --spacing-header: 5.4375rem; /* h-header: висота шапки на комп'ютері (87px макета) */
+  --spacing-cta: 4.375rem; /* size-cta: кружок кнопки зі стрілкою (70px макета) */
 
   /* ---------- Ширина сторінки ---------- */
   --container-page: 1920px; /* max-w-page */
 
+  /* ---------- Рух ---------- */
+  --ease-spring: cubic-bezier(0.6, -0.3, 0.25, 1.3); /* ease-spring: пружинка з «перельотом» (бульбашка мови) */
+  --ease-soft: cubic-bezier(0.2, 0.7, 0.2, 1); /* ease-soft: м'яка зупинка (поява блоків) */
+  --ease-glide: cubic-bezier(0.65, 0, 0.35, 1); /* ease-glide: плавний старт і зупинка (карусель) */
+
+  /* Поява блоку знизу при завантаженні. Затримка — змінна --delay на елементі. */
+  --animate-rise: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) var(--delay, 0s) backwards;
+  /* Поява літери слова «design.», ніби друкують. Затримка — --delay. */
+  --animate-letter: letter-in 0.25s ease-out var(--delay, 0s) both;
+  /* «Бульбашка» перемикача мови розтягується в русі, як крапля. */
+  --animate-squash: squash 0.55s ease;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(1.75rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes letter-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes squash {
+    40% {
+      transform: scale(1.5, 0.78);
+    }
+  }
+
   /*
    * Відступи: стандартна шкала Tailwind (1 крок = 4px),
-   * але в системі дозволено лише 2, 3, 4, 6, 8 (8, 12, 16, 24, 32px).
+   * у системі — 2, 3, 4, 6, 8 (8, 12, 16, 24, 32px). Винятки для точності зі старим
+   * макетом позначені в компонентах коментарем «як у старому макеті».
    */
+}
+
+/*
+ * Масштаб як у старому макеті: від 1100px усе, що задано в rem (текст, відступи,
+ * радіуси, розміри), зменшується пропорційно ширині екрана. 1920px = 16px.
+ */
+@media (min-width: 68.75rem) {
+  :root {
+    font-size: calc(min(100vw, 1920px) / 120);
+    --text-display: 45.2rem; /* 723px на 1920 */
+  }
 }
 
 /*
@@ -95,12 +173,12 @@
 /*
  * Сітка першого екрана на широкому екрані: пропорції колонок зі старого макета 1920px
  * (портрет 229, проміжок 21, про мене 274, проміжок 146, пітч 316, проміжок 56, кейси 818).
- * Пітч не вужчий за 20rem, щоб кнопка запиту вміщалася.
+ * Разом із масштабом від 1100px колонки й текст зменшуються однаково, як у старому.
  */
 @utility grid-cols-hero {
   grid-template-columns:
     minmax(0, 229fr) minmax(0, 21fr) minmax(0, 274fr) minmax(0, 146fr)
-    minmax(20rem, 316fr) minmax(0, 56fr) minmax(0, 818fr);
+    minmax(0, 316fr) minmax(0, 56fr) minmax(0, 818fr);
 }
 
 /* Ховає смугу прокрутки, прокрутка лишається (карусель кейсів). */

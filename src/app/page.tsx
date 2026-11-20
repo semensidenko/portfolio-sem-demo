@@ -4,9 +4,10 @@ import { Hero } from "@/components/Hero/Hero";
 export default function Home() {
   return (
     <>
-      <Header />
+      {/* Як у старому макеті: пункт «Роботи» підкреслений. */}
+      <Header activeHref="#works" ctaRevealAfterId="hero-cta" />
       <main>
-        <Hero />
+        <Hero ctaId="hero-cta" />
       </main>
     </>
   );

@@ -32,17 +32,17 @@ export interface ButtonProps
 const base =
   "group inline-flex items-center gap-4 rounded-control text-label font-bold uppercase focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
 
-// Кружок: іконка 24px + відступи з набору (4 → 56px, 6 → 72px).
+// Кружок, як у старому макеті: md — 56px; lg — 70px (size-cta), на вузькому телефоні 56px.
 const circleSizes: Record<ButtonSize, string> = {
-  md: "p-4",
-  lg: "p-6",
+  md: "size-14",
+  lg: "size-14 phone:size-cta",
 };
 
 const states: Record<ButtonVariant, { enabled: { label: string; circle: string }; disabled: { label: string; circle: string } }> = {
   primary: {
     enabled: {
       label: "cursor-pointer text-ink",
-      circle: "border-accent bg-accent text-canvas group-hover:border-ink-muted group-hover:bg-ink-muted",
+      circle: "border-accent bg-accent text-canvas group-hover:scale-108",
     },
     disabled: {
       label: "cursor-not-allowed text-ink-muted",
@@ -52,7 +52,7 @@ const states: Record<ButtonVariant, { enabled: { label: string; circle: string }
   secondary: {
     enabled: {
       label: "cursor-pointer text-ink",
-      circle: "border-ink-muted text-ink group-hover:bg-surface",
+      circle: "border-ink-muted text-ink group-hover:scale-108 group-hover:bg-surface",
     },
     disabled: {
       label: "cursor-not-allowed text-ink-muted",
@@ -103,7 +103,7 @@ export function Button({
     <>
       <span>{children}</span>
       <span
-        className={`inline-flex shrink-0 items-center justify-center rounded-control border transition-colors motion-reduce:transition-none ${circleSizes[size]} ${look.circle}`}
+        className={`inline-flex shrink-0 items-center justify-center rounded-control border transition duration-200 motion-reduce:transition-none ${circleSizes[size]} ${look.circle}`}
       >
         <Arrow animated={!disabled} />
       </span>
