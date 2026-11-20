@@ -28,7 +28,10 @@
 
 ## Компоненти
 
-Заповнимо далі.
+Кожен компонент лежить у `src/components/<Назва>/` разом з історією `<Назва>.stories.tsx`. Повний опис — на сторінці Docs у Storybook.
+
+- **Button** ([src/components/Button/Button.tsx](src/components/Button/Button.tsx)) — текст великими літерами й кружок зі стрілкою. Варіанти `primary` / `secondary`, розміри `md` / `lg`, `disabled` через `aria-disabled` з поясненням `disabledReason`, `href` робить посилання. Storybook: `Components/Button`.
+- **FormField** ([src/components/FormField/FormField.tsx](src/components/FormField/FormField.tsx)) — текстове поле з підписом над ним. Стани: default, hover, focus, заповнене, помилка (`error` + `errorMessage`), `disabled`. Storybook: `Components/FormField`.
 
 ## Правила
 
