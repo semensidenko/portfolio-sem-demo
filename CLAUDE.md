@@ -32,6 +32,9 @@
 
 - **Button** ([src/components/Button/Button.tsx](src/components/Button/Button.tsx)) — текст великими літерами й кружок зі стрілкою. Варіанти `primary` / `secondary`, розміри `md` / `lg`, `disabled` через `aria-disabled` з поясненням `disabledReason`, `href` робить посилання. Storybook: `Components/Button`.
 - **FormField** ([src/components/FormField/FormField.tsx](src/components/FormField/FormField.tsx)) — текстове поле з підписом над ним. Стани: default, hover, focus, заповнене, помилка (`error` + `errorMessage`), `disabled`. Storybook: `Components/FormField`.
+- **Header** ([src/components/Header/Header.tsx](src/components/Header/Header.tsx)) — шапка сайту: логотип (`logo`, зараз «Семен Сіденко»), Nav, LangSwitch і Button «Розповісти про проєкт». Прилипає до верху (`sticky`). Від `xl` (1280px) в один рядок, вужче — бургер, кнопка запиту в мобільному меню. Storybook: `Components/Header`.
+- **Nav** ([src/components/Nav/Nav.tsx](src/components/Nav/Nav.tsx)) — меню з п'яти пунктів (Роботи, Пакети, Процес, Про мене, Контакти), активний через `activeHref`. Повертає бургер і `<nav>` без обгортки: потрібен батьківський flex-контейнер з `flex-wrap`. Storybook: `Components/Nav`.
+- **LangSwitch** ([src/components/LangSwitch/LangSwitch.tsx](src/components/LangSwitch/LangSwitch.tsx)) — перемикач UA/EN з «бульбашкою», кнопки з `aria-pressed`. Лише повідомляє про вибір через `onChange`, перекладу ще немає. Storybook: `Components/LangSwitch`.
 
 ## Правила
 
