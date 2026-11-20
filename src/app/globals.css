@@ -1,6 +1,100 @@
 @import "tailwindcss";
 
 /*
- * Дизайн-токени додаються сюди через @theme
- * (кольори, типографіка, відступи, радіуси).
+ * Дизайн-токени сайту. Це єдине джерело значень:
+ * у компонентах і історіях використовуються лише класи з цих токенів.
+ * Стандартні кольори, розміри тексту, радіуси, пропорції й шрифти Tailwind скинуто.
  */
+@theme {
+  /* ---------- Кольори ---------- */
+  --color-*: initial;
+  --color-canvas: #ffffff; /* фон сторінки */
+  --color-surface: #f4f4f4; /* картки й поля (запропоновано) */
+  --color-line: #d9d9d9; /* декоративні лінії й рамки карток */
+  --color-accent: #000000; /* акцент: темна кнопка, активний перемикач */
+  --color-ink: #000000; /* основний текст */
+  --color-ink-muted: #454545; /* приглушений текст, межа полів і кнопок без заливки */
+  --color-danger: #c62828; /* текст помилки й межа поля з помилкою (запропоновано) */
+
+  /* ---------- Шрифти: див. @theme inline нижче ---------- */
+  --font-*: initial;
+
+  --font-weight-*: initial;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* ---------- Розміри тексту ---------- */
+  --text-*: initial;
+
+  /* 13px: формат у картці кейса */
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.1;
+  --text-caption--letter-spacing: 0em;
+  --text-caption--font-weight: 500;
+
+  /* 18px: основний текст */
+  --text-body: 1.125rem;
+  --text-body--line-height: calc(22 / 18);
+  --text-body--letter-spacing: -0.03em;
+  --text-body--font-weight: 500;
+
+  /* 18px, великі літери в компоненті: меню, перемикач мови, текст кнопок і дій */
+  --text-label: 1.125rem;
+  --text-label--line-height: 1;
+  --text-label--letter-spacing: -0.05em;
+  --text-label--font-weight: 500;
+
+  /* 20px: вступний текст (запропоновано) */
+  --text-lead: 1.25rem;
+  --text-lead--line-height: 1.25;
+  --text-lead--letter-spacing: -0.03em;
+  --text-lead--font-weight: 500;
+
+  /* 24px: заголовки блоків */
+  --text-heading: 1.5rem;
+  --text-heading--line-height: calc(25 / 24);
+  --text-heading--letter-spacing: -0.03em;
+  --text-heading--font-weight: 700;
+
+  /* Велике слово «design.»: росте з шириною екрана, максимум як у макеті 1920px */
+  --text-display: min(37.6vw, 723px);
+  --text-display--line-height: 0.9;
+  --text-display--letter-spacing: -0.05em;
+  --text-display--font-weight: 400;
+
+  /* ---------- Радіуси ---------- */
+  --radius-*: initial;
+  --radius-control: 9999px; /* кнопки, поля, перемикач: таблетка */
+  --radius-card: 0px; /* картки й картинки: прямі кути */
+
+  /* ---------- Пропорції картинок ---------- */
+  --aspect-*: initial;
+  --aspect-cover: 4 / 3; /* обкладинка кейса */
+  --aspect-portrait: 3 / 4; /* портрет */
+
+  /* ---------- Ширина сторінки ---------- */
+  --container-page: 1920px; /* max-w-page */
+
+  /*
+   * Відступи: стандартна шкала Tailwind (1 крок = 4px),
+   * але в системі дозволено лише 2, 3, 4, 6, 8 (8, 12, 16, 24, 32px).
+   */
+}
+
+/*
+ * Шрифти. Змінні --font-inter і --font-urbanist створює next/font (src/app/fonts.ts)
+ * на <html> сайту або на обгортці історій у Storybook. «inline» підставляє їх
+ * прямо в класи font-sans і font-display, тому шрифт працює в обох місцях.
+ */
+@theme inline {
+  --font-sans: var(--font-inter), system-ui, sans-serif; /* font-sans: увесь текст */
+  --font-display: var(--font-urbanist), var(--font-inter), sans-serif; /* font-display: слово «design.» */
+}
+
+@layer base {
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+  }
+}

@@ -1,0 +1,78 @@
+import { Meta, ColorPalette, ColorItem, Typeset } from "@storybook/addon-docs/blocks";
+import { fontVariables } from "../app/fonts";
+
+<Meta title="Foundations/Tokens" />
+
+<div className={fontVariables}>
+
+# Токени
+
+Усі значення живуть лише в блоці `@theme` у `src/app/globals.css`. Тут вони показані за іменами класів. Стандартні кольори, розміри тексту, радіуси й пропорції Tailwind скинуто: класи на кшталт `text-sm`, `bg-white`, `rounded-lg` не працюють.
+
+## Кольори
+
+<ColorPalette>
+  <ColorItem title="canvas" subtitle="Фон сторінки · bg-canvas" colors={{ canvas: "var(--color-canvas)" }} />
+  <ColorItem title="surface" subtitle="Картки й поля · bg-surface" colors={{ surface: "var(--color-surface)" }} />
+  <ColorItem title="line" subtitle="Декоративні лінії й рамки карток · border-line" colors={{ line: "var(--color-line)" }} />
+  <ColorItem title="accent" subtitle="Акцент: темна кнопка, активний перемикач · bg-accent" colors={{ accent: "var(--color-accent)" }} />
+  <ColorItem title="ink" subtitle="Основний текст · text-ink" colors={{ ink: "var(--color-ink)" }} />
+  <ColorItem title="ink-muted" subtitle="Приглушений текст, межа полів і кнопок без заливки · text-ink-muted, border-ink-muted" colors={{ "ink-muted": "var(--color-ink-muted)" }} />
+  <ColorItem title="danger" subtitle="Текст помилки й межа поля з помилкою · text-danger, border-danger" colors={{ danger: "var(--color-danger)" }} />
+</ColorPalette>
+
+## Шрифти
+
+- `font-sans`: Inter, увесь текст інтерфейсу (латиниця й кирилиця).
+- `font-display`: Urbanist, лише велике латинське слово «design.» (кирилиці в шрифті немає).
+
+<Typeset
+  fontFamily="var(--font-inter)"
+  fontSizes={["var(--text-caption)", "var(--text-body)", "var(--text-label)", "var(--text-lead)", "var(--text-heading)"]}
+  sampleText="Сайти, яким довіряють з першого екрана"
+/>
+
+### Стилі тексту
+
+Кожен клас задає разом розмір, висоту рядка, трекінг і жирність.
+
+<div className="sb-unstyled flex flex-col gap-6 font-sans">
+  <div><p className="text-caption text-ink-muted">text-caption · формат у картці кейса</p><p className="text-caption">Багатосторінковий сайт</p></div>
+  <div><p className="text-caption text-ink-muted">text-body · основний текст</p><p className="text-body">Проєктую дизайн лендінгів і сайтів, які з першого екрана виглядають так, що бізнесу довіряють.</p></div>
+  <div><p className="text-caption text-ink-muted">text-label + uppercase · меню, перемикач мови, текст кнопок (для дій ще font-bold)</p><p className="text-label uppercase">Роботи · Пакети · Процес</p><p className="text-label font-bold uppercase">Розповісти про проєкт</p></div>
+  <div><p className="text-caption text-ink-muted">text-lead · вступний текст</p><p className="text-lead">Оберіть свою сферу, щоб побачити схожий проєкт</p></div>
+  <div><p className="text-caption text-ink-muted">text-heading · заголовки блоків</p><p className="text-heading">Дизайн сайтів для бізнесу</p></div>
+  <div><p className="text-caption text-ink-muted">text-display + font-display · велике слово</p><p className="font-display text-display">design.</p></div>
+</div>
+
+## Радіуси
+
+<div className="sb-unstyled flex flex-wrap gap-6 font-sans">
+  <div className="rounded-control border border-ink-muted px-6 py-3 text-label uppercase">rounded-control</div>
+  <div className="rounded-card border border-line bg-surface p-8 text-body">rounded-card · прямі кути</div>
+</div>
+
+## Пропорції картинок
+
+<div className="sb-unstyled grid grid-cols-4 gap-6 font-sans text-caption">
+  <div className="col-span-2 flex flex-col gap-2"><div className="aspect-cover rounded-card bg-line" /><p>aspect-cover · обкладинка кейса</p></div>
+  <div className="flex flex-col gap-2"><div className="aspect-portrait rounded-card bg-line" /><p>aspect-portrait · портрет</p></div>
+</div>
+
+## Відступи
+
+Дозволено лише п'ять кроків. Число в класі множиться на 4px: `p-2`, `gap-4`, `mt-8`.
+
+<div className="sb-unstyled flex items-end gap-6 font-sans text-caption">
+  <div className="flex flex-col items-start gap-2"><div className="size-2 bg-accent" /><p>2</p></div>
+  <div className="flex flex-col items-start gap-2"><div className="size-3 bg-accent" /><p>3</p></div>
+  <div className="flex flex-col items-start gap-2"><div className="size-4 bg-accent" /><p>4</p></div>
+  <div className="flex flex-col items-start gap-2"><div className="size-6 bg-accent" /><p>6</p></div>
+  <div className="flex flex-col items-start gap-2"><div className="size-8 bg-accent" /><p>8</p></div>
+</div>
+
+## Ширина сторінки
+
+`max-w-page`: максимальна ширина сторінки, як у макеті. Бічні поля: `px-8` на комп'ютері, `px-4` на телефоні.
+
+</div>
