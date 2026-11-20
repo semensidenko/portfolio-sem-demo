@@ -109,10 +109,7 @@
   --ease-soft: cubic-bezier(0.2, 0.7, 0.2, 1); /* ease-soft: м'яка зупинка (поява блоків) */
   --ease-glide: cubic-bezier(0.65, 0, 0.35, 1); /* ease-glide: плавний старт і зупинка (карусель) */
 
-  /* Поява блоку знизу при завантаженні. Затримка — змінна --delay на елементі. */
-  --animate-rise: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) var(--delay, 0s) backwards;
-  /* Поява літери слова «design.», ніби друкують. Затримка — --delay. */
-  --animate-letter: letter-in 0.25s ease-out var(--delay, 0s) both;
+  /* animate-rise і animate-letter — у @theme inline нижче (їм потрібна змінна --delay з елемента). */
   /* «Бульбашка» перемикача мови розтягується в русі, як крапля. */
   --animate-squash: squash 0.55s ease;
 
@@ -166,6 +163,15 @@
  * прямо в класи font-sans і font-display, тому шрифт працює в обох місцях.
  */
 @theme inline {
+  /*
+   * Анімації із затримкою. «inline» підставляє значення прямо в клас, тож var(--delay)
+   * читається з самого елемента (style={{ "--delay": "0.22s" }}), а не з кореня сторінки.
+   */
+  /* Поява блоку знизу при завантаженні. */
+  --animate-rise: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) var(--delay, 0s) backwards;
+  /* Поява літери слова «design.», ніби друкують. */
+  --animate-letter: letter-in 0.25s ease-out var(--delay, 0s) both;
+
   --font-sans: var(--font-inter), system-ui, sans-serif; /* font-sans: увесь текст */
   --font-display: var(--font-urbanist), var(--font-inter), sans-serif; /* font-display: слово «design.» */
 }
