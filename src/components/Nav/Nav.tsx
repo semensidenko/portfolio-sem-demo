@@ -105,11 +105,16 @@ export function Nav({ items = defaultNavItems, activeHref, defaultOpen = false, 
                   href={item.href}
                   aria-current={active ? "location" : undefined}
                   onClick={() => setOpen(false)}
-                  className={`block py-4 text-lead uppercase text-ink decoration-1 underline-offset-3 desk:py-0 desk:text-label ${
-                    active ? "underline" : ""
-                  } ${focusRing}`}
+                  className={`group block py-4 text-lead uppercase text-ink desk:py-0 desk:text-label ${focusRing}`}
                 >
-                  {item.label}
+                  {/* Лінія під пунктом — лише при наведенні чи фокусі, як у TextLink */}
+                  <span className="relative inline-block">
+                    {item.label}
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-x-0 -bottom-1 h-0.5 origin-left scale-x-0 bg-ink transition-transform duration-450 motion-reduce:transition-none group-hover:scale-x-100 group-focus-visible:scale-x-100"
+                    />
+                  </span>
                 </a>
               </li>
             );
